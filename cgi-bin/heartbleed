@@ -1,0 +1,30 @@
+#!/bin/bash
+
+IP=$(echo "$QUERY_STRING" | sed -n 's/^.*ip=\([^&]*\).*$/\1/p' | sed 's/%3A/:/g')
+
+if [ $IP ]
+then
+    echo -e "Content-type: text/html\n\n<!DOCTYPE html>
+
+<html>
+<head>
+
+  <title>nmap -d --script ssl-heartbleed --script-args vulns.showall -sV $IP 2>&1</title>
+</head>
+
+<body>
+<pre>"
+    if nmap -d --script ssl-heartbleed --script-args vulns.showall -sV $IP 2>&1
+    then
+        echo -e "</pre>\n"
+        echo -e "<hr />\n"
+        echo -e "<a href=\"/\">Main page</a>\n"
+        echo -e "</body>\n</html>"
+    else
+        echo -e "</pre>\n"
+        echo -e "There was a problem. Go back to the <a href=\"/\">Main page</a>.\n"
+        echo -e "</body>\n</html>"
+    fi
+    else
+        echo -e "Location: /\n"
+fi
