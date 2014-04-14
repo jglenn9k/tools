@@ -77,6 +77,10 @@ $ua = get_browser();
 <tr><td><input type="submit" value="TCP/SMTP Port Test" /></td>
 <td><input type="text" name="ip" /></td></tr>
 </form>
+<form name="heartbleed" action="/cgi-bin/heartbleed" method="get">
+<tr><td><input type="submit" value="Heartbleed Test" /></td>
+<td><input type="text" name="ip" /></td></tr>
+</form>
 </table>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
