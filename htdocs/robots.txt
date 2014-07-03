@@ -1,3 +1,4 @@
 # robots.txt for http://tools.ablackhat.net/
 
-
+User-agent: *
+Disallow: /cgi-bin/

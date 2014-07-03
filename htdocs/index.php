@@ -92,6 +92,6 @@ $ua = get_browser();
   ga('send', 'pageview');
 
 </script>
-<p>Questions? Want a feature? Send an email to <a href="mailto:<?php echo $_SERVER["SERVER_ADMIN"];?>"><?php echo $_SERVER["SERVER_ADMIN"];?></a>.
+<p>Questions? Issues? Want a feature? Let me know at <a href="https://github.com/thedonkdonk/tools/issues">https://github.com/thedonkdonk/tools/issues</a>.
 </body>
 </html>

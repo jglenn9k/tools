@@ -1,9 +1,5 @@
 <?php header("Content-type: text/plain"); ?>
 # Kickstart for CentOS 6
-# $Rev:: 2             $:  Revision of last commit
-# $Author:: jglenn     $:  Author of last commit
-# $Date:: 2014-01-06 0#$:  Date of last commit
-
 
 install
 url --url http://mirror.rackspace.com/CentOS/6/os/x86_64/
@@ -18,7 +14,7 @@ authconfig --enableshadow --passalgo=sha512
 selinux --disabled
 timezone --utc America/Chicago
 bootloader --location=mbr --driveorder=sda
-clearpart --all --initlabel
+clearpart --all
 zerombr yes
 part / --fstype=ext4 --size=500 --grow
 part swap --fstype=swap --recommended
@@ -63,11 +59,11 @@ mlocate
 %post
 rpm -ivh http://mirror.rackspace.com/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -ivh http://mirror.rackspace.com/ius/stable/CentOS/6/x86_64/ius-release-1.0-11.ius.centos6.noarch.rpm
-rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-7.noarch.rpm
+rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-10.noarch.rpm
 
 rpm --import http://packages.vmware.com/tools/keys/VMWARE-PACKAGING-GPG-DSA-KEY.pub
 rpm --import http://packages.vmware.com/tools/keys/VMWARE-PACKAGING-GPG-RSA-KEY.pub
-( 
+(
 cat <<'EOF'
 [vmware-tools]
 name=VMware Tools
