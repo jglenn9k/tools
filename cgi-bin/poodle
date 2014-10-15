@@ -9,12 +9,12 @@ then
 <html>
 <head>
 
-  <title>nmap -d --script ssl-heartbleed --script-args vulns.showall -sV $IP 2>&1</title>
+  <title>nmap --script ssl-enum-ciphers -p 443 $IP 2>&1</title>
 </head>
 
 <body>
 <pre>"
-    if /usr/local/bin/nmap -d --script ssl-heartbleed --script-args vulns.showall -sV $IP 2>&1
+    if /usr/local/bin/nmap --script ssl-enum-ciphers -p 443 $IP 2>&1
     then
         echo -e "</pre>\n"
         echo -e "<hr />\n"

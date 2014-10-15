@@ -158,7 +158,16 @@ $ua = get_browser();
                         </div>
                     </div>
                 </form>
-
+                <form class="row" action="/cgi-bin/poodle" method="GET" role="form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="ip" class="form-control" placeholder="IP Address or Domain Name">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">POODLE Test</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
             </div>
         <?php include('ga.inc') ; ?>
         </div>
