@@ -7,8 +7,7 @@ lang en_US.UTF-8
 keyboard us
 network --onboot=yes --device=eth0 --bootproto=dhcp --noipv6 --hostname=<?php echo $_GET["hostname"]; ?>
 
-rootpw <?php echo $_GET["passwd"]; ?>
-
+rootpw K2r0L7x9
 firewall --service=ssh
 authconfig --enableshadow --passalgo=sha512
 selinux --disabled
@@ -55,23 +54,11 @@ file
 man
 mlocate
 
-
 %post
 rpm -ivh http://mirror.rackspace.com/epel/6/x86_64/epel-release-6-8.noarch.rpm
-rpm -ivh http://mirror.rackspace.com/ius/stable/CentOS/6/x86_64/ius-release-1.0-11.ius.centos6.noarch.rpm
-rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-10.noarch.rpm
+rpm -ivh http://mirror.rackspace.com/ius/stable/CentOS/6/x86_64/ius-release-1.0-13.ius.centos6.noarch.rpm
+rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-11.noarch.rpm
 
-rpm --import http://packages.vmware.com/tools/keys/VMWARE-PACKAGING-GPG-DSA-KEY.pub
-rpm --import http://packages.vmware.com/tools/keys/VMWARE-PACKAGING-GPG-RSA-KEY.pub
-(
-cat <<'EOF'
-[vmware-tools]
-name=VMware Tools
-baseurl=http://packages.vmware.com/tools/esx/latest/rhel6/$basearch
-enabled=1
-gpgcheck=1
-EOF
-) > /etc/yum.repos.d/vmware-tools.repo
-yum -y install puppet vmware-tools-esx-nox
+yum -y install puppet
 
 %end
