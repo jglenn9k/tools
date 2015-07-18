@@ -73,7 +73,7 @@ open-vm-tools
 
 %post
 rpm -ivh http://mirror.rackspace.com/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-rpm -ivh http://mirror.rackspace.com/ius/stable/CentOS/7/x86_64/ius-release-1.0-13.ius.centos7.noarch.rpm
+rpm -ivh http://mirror.rackspace.com/ius/stable/CentOS/7/x86_64/ius-release-1.0-14.ius.centos7.noarch.rpm
 rpm -ivh http://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-11.noarch.rpm
 yum -y install puppet
 
