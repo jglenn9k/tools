@@ -34,6 +34,11 @@ def page(title: str, output: str, *, error: bool = False) -> None:
     color = "#ff8c8c" if error else "#70f0bd"
     print(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>:root{{color-scheme:dark;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}}body{{margin:0;background:#07100e;color:#f0f8f4}}main{{width:min(calc(100% - 32px),1000px);margin:48px auto}}a{{color:#70f0bd}}h1{{font:700 clamp(1.5rem,4vw,2.5rem) system-ui;margin:0 0 24px}}pre{{padding:24px;overflow:auto;white-space:pre-wrap;word-break:break-word;background:#0d1916;border:1px solid #244138;border-radius:14px;border-top:3px solid {color};line-height:1.55}}nav{{margin-top:24px}}</style></head><body><main><h1>{html.escape(title)}</h1><pre>{html.escape(output)}</pre><nav><a href="/">← Back to all tools</a></nav></main></body></html>''')
 
+def decode_timeout_output(value: bytes | str | None) -> str:
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return value or ""
+
 def run(command: list[str]) -> tuple[str, bool]:
     if shutil.which(command[0]) is None: return f"Required command is not installed: {command[0]}", True
     try:
@@ -41,7 +46,7 @@ def run(command: list[str]) -> tuple[str, bool]:
         output = (result.stdout + result.stderr).strip() or "Command completed without output."
         return output[:200_000], result.returncode != 0
     except subprocess.TimeoutExpired as exc:
-        partial = ((exc.stdout or "") + (exc.stderr or "")).strip()
+        partial = (decode_timeout_output(exc.stdout) + decode_timeout_output(exc.stderr)).strip()
         return (partial + "\n\nRequest timed out after 35 seconds.").strip(), True
 
 def main() -> None:
