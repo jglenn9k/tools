@@ -30,6 +30,12 @@ def valid_target(value: str) -> bool:
 
 def page(title: str, output: str, *, error: bool = False) -> None:
     status = "400 Bad Request" if error else "200 OK"
+    user_agent = os.environ.get("HTTP_USER_AGENT", "")
+    if re.match(r"^(?:curl|wget)(?:/|\s|$)", user_agent, re.IGNORECASE):
+        print(f"Status: {status}\r\nContent-Type: text/plain; charset=utf-8\r\nX-Content-Type-Options: nosniff\r\nVary: User-Agent\r\n")
+        print(output)
+        return
+    print("Vary: User-Agent\r")
     print(f"Status: {status}\r\nContent-Type: text/html; charset=utf-8\r\nX-Content-Type-Options: nosniff\r\nContent-Security-Policy: default-src 'none'; style-src 'unsafe-inline'\r\n")
     color = "#ff8c8c" if error else "#70f0bd"
     print(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>:root{{color-scheme:dark;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}}body{{margin:0;background:#07100e;color:#f0f8f4}}main{{width:min(calc(100% - 32px),1000px);margin:48px auto}}a{{color:#70f0bd}}h1{{font:700 clamp(1.5rem,4vw,2.5rem) system-ui;margin:0 0 24px}}pre{{padding:24px;overflow:auto;white-space:pre-wrap;word-break:break-word;background:#0d1916;border:1px solid #244138;border-radius:14px;border-top:3px solid {color};line-height:1.55}}nav{{margin-top:24px}}</style></head><body><main><h1>{html.escape(title)}</h1><pre>{html.escape(output)}</pre><nav><a href="/">← Back to all tools</a></nav></main></body></html>''')

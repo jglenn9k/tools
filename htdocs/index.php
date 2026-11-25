@@ -24,21 +24,19 @@ $tools = [
  <title>Network Tools</title><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/app.css">
 </head>
 <body>
-<header class="hero">
- <nav class="nav" aria-label="Primary navigation"><a class="brand" href="/" aria-label="Network Tools home"><span class="brand-mark">&gt;_</span> Network Tools</a><a class="github-link" href="https://github.com/jglenn9k/tools">View on GitHub <span aria-hidden="true">↗</span></a></nav>
- <div class="hero-content"><p class="eyebrow">Diagnostics, without the clutter</p><h1>Understand what’s happening on the network.</h1><p class="intro">Run common DNS, routing, and connectivity checks from one focused workspace.</p></div>
-</header>
+<header class="site-header"><h1>Network Tools</h1></header>
 <main>
- <section class="status" aria-labelledby="connection-title"><div><p class="eyebrow">Current connection</p><h2 id="connection-title">Request details</h2></div>
+ <section class="status" aria-labelledby="connection-title">
+  <h2 id="connection-title">Connection details</h2>
   <dl class="status-grid"><div><dt>Your IP</dt><dd><?= e($remoteAddress) ?></dd></div><div><dt>Hostname</dt><dd><?= e($remoteHost) ?></dd></div><div><dt>Server</dt><dd><?= e($serverName) ?></dd></div><div><dt>Server uptime</dt><dd><?= e(uptime()) ?></dd></div></dl>
-  <details><summary>Browser details</summary><p><?= e($userAgent) ?></p></details>
+  <p>Browser: <?= e($userAgent) ?></p>
  </section>
- <section class="tools" aria-labelledby="tools-title"><div class="section-heading"><p class="eyebrow">Toolbox</p><h2 id="tools-title">Choose a diagnostic</h2></div><div class="tool-grid">
+ <section aria-label="Diagnostics"><div class="tool-grid">
  <?php foreach ($tools as [$endpoint, $name, $description, $placeholder]): ?>
-  <article class="tool-card"><div><h3><?= e($name) ?></h3><p><?= e($description) ?></p></div><form action="/cgi-bin/<?= e($endpoint) ?>" method="get"><label class="sr-only" for="<?= e($endpoint) ?>-target"><?= e($placeholder) ?></label><input id="<?= e($endpoint) ?>-target" name="ip" type="text" inputmode="url" required maxlength="253" autocomplete="off" spellcheck="false" placeholder="<?= e($placeholder) ?>"><button type="submit">Run <span aria-hidden="true">→</span></button></form></article>
+  <article class="tool-card"><div><h2><?= e($name) ?></h2><p><?= e($description) ?></p></div><form action="/cgi-bin/<?= e($endpoint) ?>" method="get"><label class="sr-only" for="<?= e($endpoint) ?>-target"><?= e($placeholder) ?></label><input id="<?= e($endpoint) ?>-target" name="ip" type="text" inputmode="url" required maxlength="253" autocomplete="off" spellcheck="false" placeholder="<?= e($placeholder) ?>"><button type="submit">Run <span aria-hidden="true">→</span></button></form></article>
  <?php endforeach; ?>
-  <article class="tool-card tool-card-wide"><div><h3>DNS lookup</h3><p>Query a specific DNS record type for a hostname.</p></div><form action="/cgi-bin/dig" method="get"><label class="sr-only" for="dns-target">Domain or IP address</label><input id="dns-target" name="ip" type="text" required maxlength="253" autocomplete="off" spellcheck="false" placeholder="Domain or IP address"><label class="sr-only" for="dns-type">Record type</label><select id="dns-type" name="type"><?php foreach (['A','AAAA','CNAME','MX','NS','PTR','SOA','SRV','TXT','CAA','ANY'] as $type): ?><option value="<?= $type ?>"><?= $type ?></option><?php endforeach; ?></select><button type="submit">Look up <span aria-hidden="true">→</span></button></form></article>
+  <article class="tool-card tool-card-wide"><div><h2>DNS lookup</h2><p>Query a specific DNS record type for a hostname.</p></div><form action="/cgi-bin/dig" method="get"><label class="sr-only" for="dns-target">Domain or IP address</label><input id="dns-target" name="ip" type="text" required maxlength="253" autocomplete="off" spellcheck="false" placeholder="Domain or IP address"><label class="sr-only" for="dns-type">Record type</label><select id="dns-type" name="type"><?php foreach (['A','AAAA','CNAME','MX','NS','PTR','SOA','SRV','TXT','CAA','ANY'] as $type): ?><option value="<?= $type ?>"><?= $type ?></option><?php endforeach; ?></select><button type="submit">Look up <span aria-hidden="true">→</span></button></form></article>
  </div></section>
 </main>
-<footer><p>Built for quick network answers.</p><a href="https://github.com/jglenn9k/tools/issues">Report an issue</a></footer>
+<footer><a href="https://github.com/jglenn9k/tools">GitHub</a> · <a href="https://github.com/jglenn9k/tools/issues">Report an issue</a></footer>
 </body></html>
