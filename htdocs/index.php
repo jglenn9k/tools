@@ -21,7 +21,7 @@ $tools = [
 <head>
  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <meta name="description" content="Fast, focused network diagnostics from your browser."><meta name="color-scheme" content="dark light">
- <title>Network Tools</title><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/app.css">
+ <title>Network Tools</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/app.css">
 </head>
 <body>
 <header class="site-header"><h1>Network Tools</h1></header>
